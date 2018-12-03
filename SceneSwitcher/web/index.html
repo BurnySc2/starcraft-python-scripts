@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>StarCraft 2 Scene Switcher</title>
+
+        <!-- Include eel.js - note this file doesn't exist in the 'web' directory -->
+        <script type="text/javascript" src="/eel.js"></script>
+        <script type="text/javascript" src="js/functions.js"></script>
+    </head>
+
+    <body>
+        <div>
+            <label for="enabled">Enabled</label>
+            <input type="checkbox" id="enabled" checked onchange="send_scenes_mapping_to_python()">
+        </div>
+        <div>
+            <label for="end_when_sc2_closes">End script when SC2 closes</label>
+            <input type="checkbox" id="end_when_sc2_closes" onchange="send_scenes_mapping_to_python()">
+        </div>
+        <div>
+            <label for="end_when_obs_closes">End script when OBS closes</label>
+            <input type="checkbox" id="end_when_obs_closes" onchange="send_scenes_mapping_to_python()">
+        </div>
+        <div>
+            <label for="caster_mode">Caster mode</label>
+            <input type="checkbox" id="caster_mode" onchange="send_scenes_mapping_to_python()">
+        </div>
+        <div id="loading_screen">
+            <label for="loading_screen_mode">Loading screen mode</label>
+            <select name="" id="loading_screen_mode" onchange="send_scenes_mapping_to_python()">
+                <option value="asap">Asap (unsafe)</option>
+                <option value="fast" selected>Fast</option>
+                <option value="delayed">On Game Start</option>
+            </select>
+        </div>
+        <hr>
+        <div>
+            <label for="menu_scene">Menu scene</label>
+            <select id="menu_scene" onchange="send_scenes_mapping_to_python()"></select>
+        </div>
+        <div>
+            <label for="game_scene">Game scene</label>
+            <select id="game_scene" onchange="send_scenes_mapping_to_python()"></select>
+        </div>
+        <div>
+            <label for="replay_scene">Replay scene</label>
+            <select id="replay_scene" onchange="send_scenes_mapping_to_python()"></select>
+        </div>
+        <hr>
+        <div>
+            <label for="caster_menu_scene">Caster menu scene</label>
+            <select id="caster_menu_scene" onchange="send_scenes_mapping_to_python()"></select>
+        </div>
+        <div>
+            <label for="caster_game_scene">Caster game scene</label>
+            <select id="caster_game_scene" onchange="send_scenes_mapping_to_python()"></select>
+        </div>
+        <div>
+            <label for="caster_replay_scene">Caster replay scene</label>
+            <select id="caster_replay_scene" onchange="send_scenes_mapping_to_python()"></select>
+        </div>
+        <hr>
+        <div>
+            <button onclick="py_get_scene_names()">Reload Scene Names</button>
+        </div>
+        <div>
+            <button onclick="py_exit_script()">Exit</button>
+        </div>
+    </body>
+</html>

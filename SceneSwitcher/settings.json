@@ -1,0 +1,17 @@
+{
+    "host": "localhost",
+    "port": 4444,
+    "password": "",
+    "update_frequency": 1,
+    "enabled": true,
+    "end_when_sc2_closes": true,
+    "end_when_obs_closes": true,
+    "caster_mode": false,
+    "loading_screen_mode": "fast",
+    "menu_scene": "my_menu_scene",
+    "game_scene": "my_game_scene",
+    "replay_scene": "my_replay_scene",
+    "caster_menu_scene": "my_menu_scene",
+    "caster_game_scene": "my_game_scene",
+    "caster_replay_scene": "my_replay_scene"
+}

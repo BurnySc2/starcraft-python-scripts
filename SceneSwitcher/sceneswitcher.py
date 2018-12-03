@@ -14,7 +14,6 @@ import eel
 import requests
 
 from enum import Enum
-from typing import List
 import json, os, threading
 import time
 
@@ -36,7 +35,7 @@ def update_sc2_location_to_scenes_mapping(scenes_json):
     sceneSwitcher.settings.update(scenes_json)
 
 @eel.expose
-def get_obs_scene_names() -> List[str]:
+def get_obs_scene_names(): # type: () -> List[str]
     global sceneSwitcher
     scene_names = sceneSwitcher.get_obs_scenes()
     # print(scene_names)
@@ -53,7 +52,7 @@ class SceneSwitcher:
         self.settings_path = "settings.json"
         self.threading_lock = threading.Lock()
         self.settings: dict = None
-        self.ws: obsws = None
+        self.ws = None # type: obsws
         self.connected = False
         self.stop_script = False
         self.last_set_scene = ""
@@ -109,13 +108,13 @@ class SceneSwitcher:
             json.dump(self.settings, f, indent=4)
 
     @ensure("Function needs to return a list of strings", lambda args, result: all(isinstance(x, str) for x in result))
-    def get_obs_scenes(self) -> List[str]:
+    def get_obs_scenes(self): # type: () -> List[str]
         """ Retrieves all created scene names from OBS Studio """
         if not self.connected:
             self.connect()
         if self.connected:
             scenes = self.ws.call(obsrequest.GetSceneList())
-            scene_names: List[str] = [scene["name"] for scene in scenes.datain["scenes"]]
+            scene_names = [scene["name"] for scene in scenes.datain["scenes"]] # type: List[str]
             return scene_names
         return []
 
@@ -162,7 +161,7 @@ class SceneSwitcher:
     @require("UI response needs to be a dict", lambda args: isinstance(args.ui_response, dict))
     @require("Game response needs to be a dict", lambda args: isinstance(args.game_response, dict))
     @ensure("Result needs to be a string", lambda args, result: isinstance(result, str))
-    def get_sc2_location(self, ui_response: dict, game_response: dict) -> str:
+    def get_sc2_location(self, ui_response, game_response): # type: (dict, dict) -> str
         """ Gets the current scene from SC2 API """
         if ui_response["activeScreens"] == []:
             if game_response["isReplay"]:
@@ -176,7 +175,7 @@ class SceneSwitcher:
 
     @require("Input needs to be a string", lambda args: isinstance(args.sc2_location, str))
     @ensure("Output needs to be an enum of type Location", lambda args, result: isinstance(result, Location))
-    def convert_sc2_location_to_enum(self, sc2_location: str) -> Location:
+    def convert_sc2_location_to_enum(self, sc2_location): # type: (str) -> Location
         location_dict = {
             "game": Location.INGAME,
             "menu": Location.MENU,
@@ -187,7 +186,7 @@ class SceneSwitcher:
         return location_dict.get(sc2_location, Location.UNKNOWN)
 
     @require("Input needs to be an enum of type Location", lambda args: isinstance(args.target_location, Location))
-    def set_sc2_location(self, target_location: Location):
+    def set_sc2_location(self, target_location): # type: (Location) -> None
         """ Sets scene in OBS Studio based on current settings """
 
         if target_location == Location.MENU:

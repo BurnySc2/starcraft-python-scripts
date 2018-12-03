@@ -3,12 +3,11 @@ language:
 python:
   - "3.4"
   - "3.5"
-  - "3.5"
   - "3.6"
   - "3.7"
-  - "nightly" # currently points to 3.7-dev
+  - "nightly"
 
 script:
-  cd SceneSwitcher
-  pip install .
-  pytest test/test_scene_switcher.py
+  - cd SceneSwitcher
+  - pip install .
+  - pytest test/test_scene_switcher.py

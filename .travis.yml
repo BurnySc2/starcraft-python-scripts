@@ -1,0 +1,18 @@
+language:
+  python
+python:
+  - "3.6"
+#  - "3.4"
+#  - "3.5"
+# Enable 3.7 without globally enabling sudo and dist: xenial for other build jobs
+#matrix:
+#  include:
+#    - python: 3.7
+#      dist: xenial
+#      sudo: true
+
+script:
+  - cd SceneSwitcher
+  - pip install -r requirements.txt
+  - cd test
+  - pytest test_scene_switcher.py

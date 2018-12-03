@@ -51,7 +51,7 @@ class SceneSwitcher:
         self.sc2_location = Location.UNKNOWN
         self.settings_path = "settings.json"
         self.threading_lock = threading.Lock()
-        self.settings: dict = None
+        self.settings = None # type: dict
         self.ws = None # type: obsws
         self.connected = False
         self.stop_script = False

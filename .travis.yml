@@ -10,4 +10,5 @@ python:
 script:
   - cd SceneSwitcher
   - pip install -r requirements.txt
-  - pytest test/test_scene_switcher.py
+  - cd test
+  - pytest test_scene_switcher.py
